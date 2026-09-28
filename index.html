@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>💍 婚礼邀请函</title>
-  <!-- 引入 Font Awesome 图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- 引入 Google Font: 浪漫字体组合 -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -30,14 +28,13 @@
     .invitation-container {
       max-width: 520px;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
       margin: 20px 0;
+      position: relative;
     }
 
-    /* 每一页卡片 */
+    /* 每一页卡片 —— 默认隐藏，只有 .active 显示 */
     .page-card {
+      display: none;
       background: #fffffffa;
       backdrop-filter: blur(4px);
       border-radius: 32px;
@@ -47,6 +44,16 @@
       position: relative;
       overflow: hidden;
       border: 1px solid #f0dfd4;
+    }
+
+    .page-card.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .page-card:hover {
@@ -120,10 +127,6 @@
     .event-theme i {
       color: #c99b7b;
       font-size: 2rem;
-      background: linear-gradient(145deg, #e9d3c0, #c99b7b);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
     }
 
     .event-sub {
@@ -132,9 +135,8 @@
       font-size: 1.1rem;
       color: #8f7668;
       margin-bottom: 26px;
-      padding-left: 6px;
-      border-left: 3px solid #dbb8a0;
       padding-left: 14px;
+      border-left: 3px solid #dbb8a0;
       font-weight: 400;
       letter-spacing: 0.5px;
     }
@@ -164,7 +166,6 @@
       color: #c99b7b;
       width: 44px;
       text-align: center;
-      filter: drop-shadow(0 4px 4px rgba(200, 150, 120, 0.12));
     }
 
     .info-text {
@@ -251,7 +252,6 @@
       transition: all 0.2s;
       outline: none;
       color: #3d2d23;
-      box-shadow: 0 2px 6px rgba(190, 150, 130, 0.03);
     }
 
     .input-group input:focus,
@@ -266,8 +266,8 @@
       min-height: 90px;
     }
 
-    /* 提交按钮 */
-    .btn-fake-submit {
+    /* 按钮通用 */
+    .btn {
       width: 100%;
       background: #b58b72;
       color: white;
@@ -289,12 +289,12 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    .btn-fake-submit i {
+    .btn i {
       color: #f7e3d6;
       font-size: 1.1rem;
     }
 
-    .btn-fake-submit:hover {
+    .btn:hover {
       background: #a1765d;
       transform: scale(1.01);
       box-shadow: 0 18px 25px -10px rgba(140, 100, 80, 0.5);
@@ -328,7 +328,6 @@
       justify-content: center;
       color: #b58b72;
       font-size: 3.2rem;
-      box-shadow: 0 8px 18px rgba(180, 130, 100, 0.08);
       flex-shrink: 0;
       border: 2px solid #ffffff;
     }
@@ -358,7 +357,6 @@
       width: 18px;
     }
 
-    /* 社交媒体图标 */
     .social-icons {
       display: flex;
       gap: 14px;
@@ -379,7 +377,6 @@
       font-size: 0.85rem;
       border: 1px solid #eddacf;
       transition: all 0.2s;
-      box-shadow: 0 3px 8px rgba(180, 140, 120, 0.04);
     }
 
     .social-icon i {
@@ -397,13 +394,11 @@
       color: #f7e3d6;
     }
 
-    /* 注意事项列表 */
     .notice-list {
       background: #fefaf7;
       border-radius: 28px;
       padding: 24px 24px 16px;
       border-left: 6px solid #dbb8a0;
-      box-shadow: 0 6px 14px rgba(190, 150, 130, 0.05);
     }
 
     .notice-list h4 {
@@ -415,7 +410,6 @@
       font-weight: 700;
       color: #4b3a2e;
       margin-bottom: 18px;
-      letter-spacing: 0.3px;
     }
 
     .notice-list h4 i {
@@ -464,65 +458,6 @@
       font-size: 0.8rem;
     }
 
-    /* 提交信息栏（链接和二维码） */
-    .submission-note {
-      max-width: 520px;
-      width: 100%;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      background: rgba(255, 245, 238, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 16px 26px;
-      border-radius: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 18px;
-      border: 1px solid #eddacf;
-      color: #5c4a3f;
-      font-size: 0.85rem;
-      box-shadow: 0 10px 20px -10px rgba(180, 140, 120, 0.2);
-    }
-
-    .link-share {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #ffffff;
-      padding: 8px 20px;
-      border-radius: 40px;
-      color: #4b3a2e;
-      font-weight: 500;
-      border: 1px solid #eddacf;
-      font-size: 0.85rem;
-    }
-
-    .link-share i {
-      color: #c99b7b;
-    }
-
-    .qr-mini {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #ffffff;
-      padding: 8px 22px 8px 18px;
-      border-radius: 40px;
-      border: 1px solid #eddacf;
-    }
-
-    .qr-mini i {
-      font-size: 1.6rem;
-      color: #b58b72;
-    }
-
-    .qr-mini span {
-      font-weight: 500;
-      color: #4b3a2e;
-      font-size: 0.85rem;
-    }
-
     /* 响应式 */
     @media (max-width: 400px) {
       .page-card {
@@ -539,24 +474,14 @@
         height: 80px;
         font-size: 2.4rem;
       }
-      .submission-note {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-        border-radius: 40px;
-      }
-      .link-share, .qr-mini {
-        justify-content: center;
-      }
     }
   </style>
 </head>
 <body>
-  <!-- 婚礼邀请函 -->
   <div class="invitation-container">
-    
-    <!-- 第一页：婚礼主题、时间、地点 -->
-    <div class="page-card">
+
+    <!-- ========== 第一页 ========== -->
+    <div class="page-card active" id="page1">
       <div class="page-badge">
         <i class="fas fa-heart"></i> 第1页 · 礼
       </div>
@@ -571,7 +496,7 @@
           <i class="fas fa-calendar-heart"></i>
           <div class="info-text">
             <div class="info-label">良辰吉日</div>
-            <div class="info-value">2070年13月32日 <small>农历十三月廿一 </small></div>
+            <div class="info-value">2070年13月32日 <small>农历十三月廿一</small></div>
           </div>
         </div>
         <div class="info-item">
@@ -592,10 +517,15 @@
       <div class="easter-egg">
         <i class="fas fa-heart"></i> 我们结婚啦 <i class="fas fa-heart"></i>
       </div>
+
+      <!-- 翻页按钮 -->
+      <button class="btn" onclick="goToPage(2)">
+        <i class="fas fa-arrow-right"></i> 下一页 · 填写回执
+      </button>
     </div>
 
-    <!-- 第二页：邀请参加人员填写个人信息 -->
-    <div class="page-card">
+    <!-- ========== 第二页 ========== -->
+    <div class="page-card" id="page2">
       <div class="page-badge">
         <i class="fas fa-pen-fancy"></i> 第2页 · 回执
       </div>
@@ -614,32 +544,42 @@
         <div class="input-group">
           <label><i class="fas fa-users"></i> 出席人数</label>
           <select>
-            <option value="1">1位 </option>
-            <option value="2">2位 </option>
-            <option value="3">3位 </option>
-            <option value="4">4位及以上 </option>
+            <option value="1">1位</option>
+            <option value="2">2位</option>
+            <option value="3">3位</option>
+            <option value="4">4位及以上</option>
           </select>
         </div>
         <div class="input-group">
           <label><i class="fas fa-utensils"></i> 饮食禁忌 / 备注</label>
           <textarea placeholder="例如：素食、海鲜过敏、需要儿童座椅等"></textarea>
         </div>
-        <button type="submit" class="btn-fake-submit">
+        <button type="submit" class="btn">
           <i class="fas fa-paper-plane"></i> 发送回执
         </button>
       </form>
+
+      <!-- 翻页按钮组 -->
+      <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <button class="btn" style="background:#e8d9cf; color:#7c675a;" onclick="goToPage(1)">
+          <i class="fas fa-arrow-left" style="color:#7c675a;"></i> 上一页
+        </button>
+        <button class="btn" onclick="goToPage(3)">
+          下一页 · 更多信息 <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
       <div class="easter-egg" style="margin-top: 16px;">
         <i class="fas fa-lock"></i> 您的信息仅用于婚礼安排 <i class="fas fa-lock"></i>
       </div>
     </div>
 
-    <!-- 第三页：二维码/社交媒体 + 注意事项 -->
-    <div class="page-card">
+    <!-- ========== 第三页 ========== -->
+    <div class="page-card" id="page3">
       <div class="page-badge">
         <i class="fas fa-qrcode"></i> 第3页
       </div>
       <div class="social-section">
-        <!-- 二维码与社交媒体 -->
         <div class="qr-block">
           <div class="qr-placeholder">
             <i class="fas fa-qrcode"></i>
@@ -650,7 +590,6 @@
           </div>
         </div>
 
-        <!-- 社交媒体图标 -->
         <div class="social-icons">
           <a href="#" class="social-icon"><i class="fab fa-weixin"></i> 微信</a>
           <a href="#" class="social-icon"><i class="fab fa-weibo"></i> 微博</a>
@@ -658,7 +597,6 @@
           <a href="#" class="social-icon"><i class="fas fa-envelope"></i> 邮箱</a>
         </div>
 
-        <!-- 注意事项 -->
         <div class="notice-list">
           <h4><i class="fas fa-clipboard-list"></i> 温馨提示</h4>
           <ul>
@@ -670,10 +608,34 @@
           </ul>
         </div>
       </div>
+
+      <!-- 翻页按钮 -->
+      <button class="btn" style="background:#e8d9cf; color:#7c675a; margin-top: 22px;" onclick="goToPage(2)">
+        <i class="fas fa-arrow-left" style="color:#7c675a;"></i> 上一页
+      </button>
+
       <div class="easter-egg" style="margin-top: 18px;">
         <i class="fas fa-heart"></i> 期待与您分享喜悦 <i class="fas fa-heart"></i>
       </div>
     </div>
+
   </div>
+
+  <script>
+    // 翻页函数
+    function goToPage(pageNum) {
+      // 隐藏所有页面
+      document.querySelectorAll('.page-card').forEach(function(card) {
+        card.classList.remove('active');
+      });
+      // 显示目标页面
+      var target = document.getElementById('page' + pageNum);
+      if (target) {
+        target.classList.add('active');
+        // 平滑滚动到顶部，防止翻页后还停在底部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
 </body>
 </html>
