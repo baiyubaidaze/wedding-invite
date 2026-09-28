@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>💍 婚礼邀请函</title>
+  <!-- 引入 Font Awesome 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- 引入 Google Font: 浪漫字体组合 -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(145deg, #fdf8f4 0%, #f7e9e0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* 邀请函容器 */
+    .invitation-container {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 20px 0;
+    }
+
+    /* 每一页卡片 */
+    .page-card {
+      background: #fffffffa;
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 36px 30px;
+      box-shadow: 0 25px 40px -18px rgba(160, 120, 100, 0.25), 0 0 0 1px rgba(230, 200, 180, 0.5) inset;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #f0dfd4;
+    }
+
+    .page-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 32px 50px -18px rgba(160, 120, 100, 0.35);
+    }
+
+    /* 装饰性角花 */
+    .page-card::before {
+      content: "❀";
+      position: absolute;
+      top: 12px;
+      left: 18px;
+      font-size: 1.6rem;
+      color: #e8cdb5;
+      opacity: 0.6;
+      transform: rotate(-15deg);
+    }
+
+    .page-card::after {
+      content: "❀";
+      position: absolute;
+      bottom: 12px;
+      right: 18px;
+      font-size: 1.6rem;
+      color: #e8cdb5;
+      opacity: 0.6;
+      transform: rotate(15deg);
+    }
+
+    /* 页面标记（页码） */
+    .page-badge {
+      position: absolute;
+      top: 22px;
+      right: 26px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #b5836b;
+      background: #fef8f3;
+      padding: 6px 16px;
+      border-radius: 40px;
+      border: 1px solid #ebdad0;
+      box-shadow: 0 2px 8px rgba(180, 140, 120, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+    }
+
+    .page-badge i {
+      font-size: 0.7rem;
+      color: #c9a88b;
+    }
+
+    /* 婚礼主题 */
+    .event-theme {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: #4b3a2e;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      letter-spacing: 0.5px;
+    }
+
+    .event-theme i {
+      color: #c99b7b;
+      font-size: 2rem;
+      background: linear-gradient(145deg, #e9d3c0, #c99b7b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .event-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #8f7668;
+      margin-bottom: 26px;
+      padding-left: 6px;
+      border-left: 3px solid #dbb8a0;
+      padding-left: 14px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* 时间地点组件 */
+    .info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 26px 0 14px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #fdf8f5;
+      padding: 18px 22px;
+      border-radius: 28px;
+      transition: all 0.2s;
+      border: 1px solid #f0e2d8;
+      box-shadow: 0 4px 8px rgba(170, 140, 120, 0.04);
+    }
+
+    .info-item i {
+      font-size: 1.9rem;
+      color: #c99b7b;
+      width: 44px;
+      text-align: center;
+      filter: drop-shadow(0 4px 4px rgba(200, 150, 120, 0.12));
+    }
+
+    .info-text {
+      flex: 1;
+    }
+
+    .info-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ab8f7e;
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3d2d23;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.3px;
+    }
+
+    .info-value small {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #7c675a;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* 第二页表单 */
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #4b3a2e;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .form-title i {
+      color: #c99b7b;
+      font-size: 1.8rem;
+    }
+
+    .input-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .input-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #6e584b;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .input-group label i {
+      color: #c99b7b;
+      font-size: 0.9rem;
+      width: 18px;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 15px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      border: 1.5px solid #eddacf;
+      border-radius: 24px;
+      background: #ffffff;
+      transition: all 0.2s;
+      outline: none;
+      color: #3d2d23;
+      box-shadow: 0 2px 6px rgba(190, 150, 130, 0.03);
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus {
+      border-color: #dbb8a0;
+      box-shadow: 0 0 0 4px rgba(219, 184, 160, 0.15);
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* 提交按钮 */
+    .btn-fake-submit {
+      width: 100%;
+      background: #b58b72;
+      color: white;
+      border: none;
+      padding: 18px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 15px 20px -10px rgba(160, 120, 100, 0.4);
+      margin-top: 12px;
+      letter-spacing: 0.8px;
+      border: 1px solid #e9d3c0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn-fake-submit i {
+      color: #f7e3d6;
+      font-size: 1.1rem;
+    }
+
+    .btn-fake-submit:hover {
+      background: #a1765d;
+      transform: scale(1.01);
+      box-shadow: 0 18px 25px -10px rgba(140, 100, 80, 0.5);
+    }
+
+    /* 第三页 社交/注意事项 */
+    .social-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .qr-block {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fdf8f5;
+      padding: 18px 22px;
+      border-radius: 32px;
+      border: 1px solid #f0e2d8;
+      flex-wrap: wrap;
+    }
+
+    .qr-placeholder {
+      width: 100px;
+      height: 100px;
+      background: #f7ede7;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b58b72;
+      font-size: 3.2rem;
+      box-shadow: 0 8px 18px rgba(180, 130, 100, 0.08);
+      flex-shrink: 0;
+      border: 2px solid #ffffff;
+    }
+
+    .qr-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #4b3a2e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qr-text p {
+      font-size: 0.82rem;
+      color: #7c675a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qr-text p i {
+      color: #c99b7b;
+      width: 18px;
+    }
+
+    /* 社交媒体图标 */
+    .social-icons {
+      display: flex;
+      gap: 14px;
+      margin: 8px 0 6px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 10px 20px;
+      border-radius: 40px;
+      text-decoration: none;
+      color: #4b3a2e;
+      font-weight: 500;
+      font-size: 0.85rem;
+      border: 1px solid #eddacf;
+      transition: all 0.2s;
+      box-shadow: 0 3px 8px rgba(180, 140, 120, 0.04);
+    }
+
+    .social-icon i {
+      font-size: 1.1rem;
+      color: #b58b72;
+    }
+
+    .social-icon:hover {
+      background: #b58b72;
+      color: white;
+      border-color: #b58b72;
+    }
+
+    .social-icon:hover i {
+      color: #f7e3d6;
+    }
+
+    /* 注意事项列表 */
+    .notice-list {
+      background: #fefaf7;
+      border-radius: 28px;
+      padding: 24px 24px 16px;
+      border-left: 6px solid #dbb8a0;
+      box-shadow: 0 6px 14px rgba(190, 150, 130, 0.05);
+    }
+
+    .notice-list h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #4b3a2e;
+      margin-bottom: 18px;
+      letter-spacing: 0.3px;
+    }
+
+    .notice-list h4 i {
+      color: #c99b7b;
+      font-size: 1.2rem;
+    }
+
+    .notice-list ul {
+      list-style: none;
+    }
+
+    .notice-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: #5c4a3f;
+      margin-bottom: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .notice-list li i {
+      color: #c99b7b;
+      font-size: 0.9rem;
+      width: 18px;
+      margin-top: 3px;
+    }
+
+    /* 底部爱心 */
+    .easter-egg {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #ab8f7e;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    .easter-egg i {
+      color: #dbb8a0;
+      font-size: 0.8rem;
+    }
+
+    /* 提交信息栏（链接和二维码） */
+    .submission-note {
+      max-width: 520px;
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background: rgba(255, 245, 238, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 16px 26px;
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      border: 1px solid #eddacf;
+      color: #5c4a3f;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 20px -10px rgba(180, 140, 120, 0.2);
+    }
+
+    .link-share {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      padding: 8px 20px;
+      border-radius: 40px;
+      color: #4b3a2e;
+      font-weight: 500;
+      border: 1px solid #eddacf;
+      font-size: 0.85rem;
+    }
+
+    .link-share i {
+      color: #c99b7b;
+    }
+
+    .qr-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      padding: 8px 22px 8px 18px;
+      border-radius: 40px;
+      border: 1px solid #eddacf;
+    }
+
+    .qr-mini i {
+      font-size: 1.6rem;
+      color: #b58b72;
+    }
+
+    .qr-mini span {
+      font-weight: 500;
+      color: #4b3a2e;
+      font-size: 0.85rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 400px) {
+      .page-card {
+        padding: 28px 18px;
+      }
+      .event-theme {
+        font-size: 1.9rem;
+      }
+      .info-value {
+        font-size: 1rem;
+      }
+      .qr-placeholder {
+        width: 80px;
+        height: 80px;
+        font-size: 2.4rem;
+      }
+      .submission-note {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        border-radius: 40px;
+      }
+      .link-share, .qr-mini {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 婚礼邀请函 -->
+  <div class="invitation-container">
+    
+    <!-- 第一页：婚礼主题、时间、地点 -->
+    <div class="page-card">
+      <div class="page-badge">
+        <i class="fas fa-heart"></i> 第1页 · 礼
+      </div>
+      <div class="event-theme">
+        <i class="fas fa-ring"></i> 张三 & 李四 · 婚礼
+      </div>
+      <div class="event-sub">
+        ✦ 诚挚邀请您见证我们的幸福时刻 ✦
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <i class="fas fa-calendar-heart"></i>
+          <div class="info-text">
+            <div class="info-label">良辰吉日</div>
+            <div class="info-value">2070年13月32日 <small>农历十三月廿一 </small></div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-location-dot"></i>
+          <div class="info-text">
+            <div class="info-label">仪式地点</div>
+            <div class="info-value">11酒店 <small>二楼至三楼</small></div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-champagne-glasses"></i>
+          <div class="info-text">
+            <div class="info-label">婚礼风格</div>
+            <div class="info-value">西式晚宴</div>
+          </div>
+        </div>
+      </div>
+      <div class="easter-egg">
+        <i class="fas fa-heart"></i> 我们结婚啦 <i class="fas fa-heart"></i>
+      </div>
+    </div>
+
+    <!-- 第二页：邀请参加人员填写个人信息 -->
+    <div class="page-card">
+      <div class="page-badge">
+        <i class="fas fa-pen-fancy"></i> 第2页 · 回执
+      </div>
+      <div class="form-title">
+        <i class="fas fa-envelope-open-text"></i> 宾客信息登记
+      </div>
+      <form onsubmit="event.preventDefault(); alert('💌 感谢您的回复！期待与您相聚婚礼现场～');">
+        <div class="input-group">
+          <label><i class="fas fa-user"></i> 您的姓名</label>
+          <input type="text" placeholder="请输入您的姓名" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-phone"></i> 联系电话</label>
+          <input type="tel" placeholder="方便我们与您联系" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-users"></i> 出席人数</label>
+          <select>
+            <option value="1">1位 </option>
+            <option value="2">2位 </option>
+            <option value="3">3位 </option>
+            <option value="4">4位及以上 </option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-utensils"></i> 饮食禁忌 / 备注</label>
+          <textarea placeholder="例如：素食、海鲜过敏、需要儿童座椅等"></textarea>
+        </div>
+        <button type="submit" class="btn-fake-submit">
+          <i class="fas fa-paper-plane"></i> 发送回执
+        </button>
+      </form>
+      <div class="easter-egg" style="margin-top: 16px;">
+        <i class="fas fa-lock"></i> 您的信息仅用于婚礼安排 <i class="fas fa-lock"></i>
+      </div>
+    </div>
+
+    <!-- 第三页：二维码/社交媒体 + 注意事项 -->
+    <div class="page-card">
+      <div class="page-badge">
+        <i class="fas fa-qrcode"></i> 第3页
+      </div>
+      <div class="social-section">
+        <!-- 二维码与社交媒体 -->
+        <div class="qr-block">
+          <div class="qr-placeholder">
+            <i class="fas fa-qrcode"></i>
+          </div>
+          <div class="qr-text">
+            <h4><i class="fas fa-camera"></i> 扫码获取婚礼相册</h4>
+            <p><i class="fas fa-at"></i> 微信号：wxid_k0vz4b277lkq22</p>
+          </div>
+        </div>
+
+        <!-- 社交媒体图标 -->
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-weixin"></i> 微信</a>
+          <a href="#" class="social-icon"><i class="fab fa-weibo"></i> 微博</a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#" class="social-icon"><i class="fas fa-envelope"></i> 邮箱</a>
+        </div>
+
+        <!-- 注意事项 -->
+        <div class="notice-list">
+          <h4><i class="fas fa-clipboard-list"></i> 温馨提示</h4>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> 仪式将于12:18准时开始，请您提前30分钟入场</li>
+            <li><i class="fas fa-check-circle"></i> 酒店提供免费停车位，导航至“11酒店”即可</li>
+            <li><i class="fas fa-check-circle"></i> 婚礼现场有专业摄影留下美好瞬间</li>
+            <li><i class="fas fa-check-circle"></i> 如有任何需求请联系：123456789</li>
+            <li><i class="fas fa-check-circle"></i> 您的到来就是最好的礼物</li>
+          </ul>
+        </div>
+      </div>
+      <div class="easter-egg" style="margin-top: 18px;">
+        <i class="fas fa-heart"></i> 期待与您分享喜悦 <i class="fas fa-heart"></i>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
